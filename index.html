@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileFlow - Upload Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <style>
+        .vanta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100">
+    <custom-navbar></custom-navbar>
+    
+    <div class="vanta-bg"></div>
+    
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+            <!-- Upload Section -->
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Upload Your Files</h1>
+                    <p class="text-gray-600">Drag & drop files here or click to browse</p>
+                </div>
+                
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center transition-all duration-300 hover:border-blue-400"
+                     id="dropZone">
+                    <div class="flex flex-col items-center justify-center space-y-4">
+                        <i data-feather="upload" class="w-12 h-12 text-blue-500"></i>
+                        <p class="text-gray-500">Select files or drag them here</p>
+                        <input type="file" id="fileInput" class="hidden" multiple>
+                        <button onclick="document.getElementById('fileInput').click()" 
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Choose Files
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-700">Upload Queue</h2>
+                        <button id="uploadBtn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                            Start Upload
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4" id="fileList">
+                        <!-- Files will be added here dynamically -->
+                        <div class="text-center py-8 text-gray-400" id="emptyState">
+                            <i data-feather="file" class="w-8 h-8 mx-auto mb-2"></i>
+                            <p>No files selected yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        VANTA.NET({
+            el: ".vanta-bg",
+            color: 0x3b82f6,
+            backgroundColor: 0xf8fafc,
+            points: 10,
+            maxDistance: 18,
+            spacing: 15
+        });
+    </script>
+</body>
+</html>
